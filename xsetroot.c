@@ -680,6 +680,7 @@ ReadBitmapFile(char *filename, uint16_t *width, uint16_t *height,
 
     status = read_bitmap_data_from_file(filename, &data, width, height, x_hot, y_hot);
     if (status == BitmapSuccess)
+        /* Is this a memory leak? Does data need to be free'd before return? */
         return xcb_create_pixmap_from_bitmap_data(dpy, root, data, *width, *height, 1,
                                                   NameToPixel(fore_color, fg_pixel),
                                                   NameToPixel(back_color, bg_pixel), NULL);
